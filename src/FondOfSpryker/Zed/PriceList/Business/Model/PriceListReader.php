@@ -28,7 +28,8 @@ class PriceListReader implements PriceListReaderInterface
     public function findById(PriceListTransfer $priceListTransfer): ?PriceListTransfer
     {
         $priceListTransfer->requireIdPriceList();
-        return $this->repository->getPriceListById($priceListTransfer->getIdPriceList());
+
+        return $this->repository->getById($priceListTransfer->getIdPriceList());
     }
 
     /**
@@ -39,6 +40,7 @@ class PriceListReader implements PriceListReaderInterface
     public function findByName(PriceListTransfer $priceListTransfer): ?PriceListTransfer
     {
         $priceListTransfer->requireName();
+
         return $this->repository->getByName($priceListTransfer->getName());
     }
 }

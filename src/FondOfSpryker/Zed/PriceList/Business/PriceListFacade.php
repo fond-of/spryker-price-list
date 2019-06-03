@@ -8,13 +8,12 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 /**
  * @method \FondOfSpryker\Zed\PriceList\Business\PriceListBusinessFactory getFactory()
  * @method \FondOfSpryker\Zed\PriceList\Persistence\PriceListRepositoryInterface getRepository()
+ * @method \FondOfSpryker\Zed\PriceList\Persistence\PriceListEntityManagerInterface getEntityManager()
  */
 class PriceListFacade extends AbstractFacade implements PriceListFacadeInterface
 {
     /**
-     * Specification:
-     * - Finds a price list by price list id in provided transfer.
-     * - Returns MerchantTransfer if found, NULL otherwise.
+     * {@inheritdoc}
      *
      * @api
      *
@@ -25,5 +24,61 @@ class PriceListFacade extends AbstractFacade implements PriceListFacadeInterface
     public function findPriceListById(PriceListTransfer $priceListTransfer): ?PriceListTransfer
     {
         return $this->getFactory()->createPriceListReader()->findById($priceListTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
+     *
+     * @return \Generated\Shared\Transfer\PriceListTransfer|null
+     */
+    public function findPriceListByName(PriceListTransfer $priceListTransfer): ?PriceListTransfer
+    {
+        return $this->getFactory()->createPriceListReader()->findByName($priceListTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
+     *
+     * @return \Generated\Shared\Transfer\PriceListTransfer
+     */
+    public function persistPriceList(PriceListTransfer $priceListTransfer): PriceListTransfer
+    {
+        return $this->getFactory()->createPriceListWriter()->persist($priceListTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
+     *
+     * @return void
+     */
+    public function deletePriceListById(PriceListTransfer $priceListTransfer): void
+    {
+        $this->getFactory()->createPriceListWriter()->deleteById($priceListTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
+     *
+     * @return void
+     */
+    public function deletePriceListByName(PriceListTransfer $priceListTransfer): void
+    {
+        $this->getFactory()->createPriceListWriter()->deleteByName($priceListTransfer);
     }
 }

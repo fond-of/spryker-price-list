@@ -11,13 +11,11 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 class PriceListRepository extends AbstractRepository implements PriceListRepositoryInterface
 {
     /**
-     * Specification:
-     * - Returns a PriceListTransfer by price list id.
-     * - Returns null in case a record is not found.
-     *
-     * @api
+     * {@inheritdoc}
      *
      * @param int $idPriceList
+     *
+     * @throws
      *
      * @return \Generated\Shared\Transfer\PriceListTransfer|null
      */
@@ -37,13 +35,11 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
     }
 
     /**
-     * Specification:
-     * - Returns a PriceListTransfer by price list name.
-     * - Returns null in case a record is not found.
-     *
-     * @api
+     * {@inheritdoc}
      *
      * @param int|string $name
+     *
+     * @throws
      *
      * @return \Generated\Shared\Transfer\PriceListTransfer|null
      */

@@ -8,6 +8,10 @@
         <column name="id_price_list" required="true" type="INTEGER" autoIncrement="true" primaryKey="true" />
         <column name="name" required="true" size="255" type="VARCHAR"/>
 
+        <unique name="fos_price_list-name">
+            <unique-column name="name"/>
+        </unique>
+
         <behavior name="timestampable"/>
 
         <id-method-parameter value="fos_price_list_pk_seq"/>
