@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\PriceList\Persistence;
 
+use Generated\Shared\Transfer\PriceListCollectionTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
@@ -15,9 +16,9 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
      *
      * @param int $idPriceList
      *
-     * @throws
-     *
      * @return \Generated\Shared\Transfer\PriceListTransfer|null
+     *
+     * @throws
      */
     public function getById(int $idPriceList): ?PriceListTransfer
     {
@@ -37,11 +38,11 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
     /**
      * {@inheritdoc}
      *
-     * @param int|string $name
-     *
-     * @throws
+     * @param string $name
      *
      * @return \Generated\Shared\Transfer\PriceListTransfer|null
+     *
+     * @throws
      */
     public function getByName(string $name): ?PriceListTransfer
     {
@@ -56,5 +57,29 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
         return $this->getFactory()
             ->createPropelPriceListMapper()
             ->mapEntityToTransfer($fosPriceList, new PriceListTransfer());
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return \Generated\Shared\Transfer\PriceListCollectionTransfer
+     */
+    public function getAll(): PriceListCollectionTransfer
+    {
+        $fosPriceLists = $this->getFactory()
+            ->createPriceListQuery()
+            ->find();
+
+        $priceListCollectionTransfer = new PriceListCollectionTransfer();
+
+        foreach ($fosPriceLists as $fosPriceList) {
+            $priceListTransfer = $this->getFactory()
+                ->createPropelPriceListMapper()
+                ->mapEntityToTransfer($fosPriceList, new PriceListTransfer());
+
+            $priceListCollectionTransfer->addPriceList($priceListTransfer);
+        }
+
+        return $priceListCollectionTransfer;
     }
 }

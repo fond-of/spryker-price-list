@@ -17,6 +17,7 @@ interface PriceListMapperInterface
         PriceListTransfer $priceListTransfer,
         FosPriceList $fosPriceList
     ): FosPriceList;
+
     /**
      * @param \Orm\Zed\PriceList\Persistence\FosPriceList $fosPriceList
      * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer

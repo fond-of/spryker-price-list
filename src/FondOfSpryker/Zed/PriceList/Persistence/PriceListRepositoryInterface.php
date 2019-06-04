@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\PriceList\Persistence;
 
+use Generated\Shared\Transfer\PriceListCollectionTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
 
 interface PriceListRepositoryInterface
@@ -26,9 +27,20 @@ interface PriceListRepositoryInterface
      *
      * @api
      *
-     * @param int|string $name
+     * @param string $name
      *
      * @return \Generated\Shared\Transfer\PriceListTransfer|null
      */
     public function getByName(string $name): ?PriceListTransfer;
+
+    /**
+     * Specification:
+     * - Returns a PriceListCollectionTransfer.
+     * - Returns empty collection in case no record is found.
+     *
+     * @api
+     *
+     * @return \Generated\Shared\Transfer\PriceListCollectionTransfer
+     */
+    public function getAll(): PriceListCollectionTransfer;
 }

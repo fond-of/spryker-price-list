@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\PriceList\Business;
 
+use Generated\Shared\Transfer\PriceListCollectionTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
 
 interface PriceListFacadeInterface
@@ -71,4 +72,14 @@ interface PriceListFacadeInterface
      * @return void
      */
     public function deletePriceListByName(PriceListTransfer $priceListTransfer): void;
+
+    /**
+     * Specification:
+     * - Retrieve all price lists in DB.
+     *
+     * @api
+     *
+     * @return \Generated\Shared\Transfer\PriceListCollectionTransfer
+     */
+    public function getPriceListCollection(): PriceListCollectionTransfer;
 }

@@ -3,6 +3,7 @@
 namespace FondOfSpryker\Zed\PriceList\Business\Model;
 
 use FondOfSpryker\Zed\PriceList\Persistence\PriceListRepositoryInterface;
+use Generated\Shared\Transfer\PriceListCollectionTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
 
 class PriceListReader implements PriceListReaderInterface
@@ -42,5 +43,13 @@ class PriceListReader implements PriceListReaderInterface
         $priceListTransfer->requireName();
 
         return $this->repository->getByName($priceListTransfer->getName());
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\PriceListCollectionTransfer
+     */
+    public function findAll(): PriceListCollectionTransfer
+    {
+        return $this->repository->getAll();
     }
 }
