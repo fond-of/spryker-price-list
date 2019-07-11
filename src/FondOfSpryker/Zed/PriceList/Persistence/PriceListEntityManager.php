@@ -27,8 +27,11 @@ class PriceListEntityManager extends AbstractEntityManager implements PriceListE
             $fosPriceListQuery->filterByIdPriceList($priceListTransfer->getIdPriceList());
         }
 
-        $fosPriceList = $fosPriceListQuery->filterByName($priceListTransfer->getName())
-            ->findOneOrCreate();
+        if ($priceListTransfer->getIdPriceList() === null && $priceListTransfer->getName() !== null) {
+            $fosPriceListQuery->filterByName($priceListTransfer->getName());
+        }
+
+        $fosPriceList = $fosPriceListQuery->findOneOrCreate();
 
         $fosPriceList = $this->getFactory()
             ->createPropelPriceListMapper()
