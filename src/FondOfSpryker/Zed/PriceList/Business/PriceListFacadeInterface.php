@@ -35,9 +35,7 @@ interface PriceListFacadeInterface
 
     /**
      * Specification:
-     * - Finds a price list record by ID and NAME in DB.
-     * - Uses incoming transfer to create or update entity.
-     * - Persists the entity to DB.
+     * - Creates a new price list
      *
      * @api
      *
@@ -45,7 +43,19 @@ interface PriceListFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PriceListTransfer
      */
-    public function persistPriceList(PriceListTransfer $priceListTransfer): PriceListTransfer;
+    public function createPriceList(PriceListTransfer $priceListTransfer): PriceListTransfer;
+
+    /**
+     * Specification:
+     * - Updates an existing price list
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
+     *
+     * @return \Generated\Shared\Transfer\PriceListTransfer
+     */
+    public function updatePriceList(PriceListTransfer $priceListTransfer): PriceListTransfer;
 
     /**
      * Specification:

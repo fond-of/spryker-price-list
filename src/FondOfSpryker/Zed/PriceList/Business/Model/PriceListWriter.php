@@ -27,8 +27,6 @@ class PriceListWriter implements PriceListWriterInterface
      */
     public function persist(PriceListTransfer $priceListTransfer): PriceListTransfer
     {
-        $priceListTransfer->requireName();
-
         return $this->entityManager->persist($priceListTransfer);
     }
 
@@ -54,5 +52,27 @@ class PriceListWriter implements PriceListWriterInterface
         $priceListTransfer->requireName();
 
         $this->entityManager->deleteByName($priceListTransfer->getName());
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
+     *
+     * @return \Generated\Shared\Transfer\PriceListTransfer
+     */
+    public function create(PriceListTransfer $priceListTransfer): PriceListTransfer
+    {
+        return $this->entityManager->persist($priceListTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
+     *
+     * @return \Generated\Shared\Transfer\PriceListTransfer
+     */
+    public function update(PriceListTransfer $priceListTransfer): PriceListTransfer
+    {
+        $priceListTransfer->requireIdPriceList();
+
+        return $this->entityManager->persist($priceListTransfer);
     }
 }

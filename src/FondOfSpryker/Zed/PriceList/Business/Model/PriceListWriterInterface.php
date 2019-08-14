@@ -11,7 +11,14 @@ interface PriceListWriterInterface
      *
      * @return \Generated\Shared\Transfer\PriceListTransfer
      */
-    public function persist(PriceListTransfer $priceListTransfer): PriceListTransfer;
+    public function create(PriceListTransfer $priceListTransfer): PriceListTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
+     *
+     * @return \Generated\Shared\Transfer\PriceListTransfer
+     */
+    public function update(PriceListTransfer $priceListTransfer): PriceListTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer

@@ -16,11 +16,11 @@ class PriceListFacade extends AbstractFacade implements PriceListFacadeInterface
     /**
      * {@inheritdoc}
      *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
      *
      * @return \Generated\Shared\Transfer\PriceListTransfer|null
-     * @api
-     *
      */
     public function findPriceListById(PriceListTransfer $priceListTransfer): ?PriceListTransfer
     {
@@ -30,11 +30,11 @@ class PriceListFacade extends AbstractFacade implements PriceListFacadeInterface
     /**
      * {@inheritdoc}
      *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
      *
      * @return \Generated\Shared\Transfer\PriceListTransfer|null
-     * @api
-     *
      */
     public function findPriceListByName(PriceListTransfer $priceListTransfer): ?PriceListTransfer
     {
@@ -44,25 +44,11 @@ class PriceListFacade extends AbstractFacade implements PriceListFacadeInterface
     /**
      * {@inheritdoc}
      *
-     * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
-     *
-     * @return \Generated\Shared\Transfer\PriceListTransfer
      * @api
-     *
-     */
-    public function persistPriceList(PriceListTransfer $priceListTransfer): PriceListTransfer
-    {
-        return $this->getFactory()->createPriceListWriter()->persist($priceListTransfer);
-    }
-
-    /**
-     * {@inheritdoc}
      *
      * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
      *
      * @return void
-     * @api
-     *
      */
     public function deletePriceListById(PriceListTransfer $priceListTransfer): void
     {
@@ -72,11 +58,11 @@ class PriceListFacade extends AbstractFacade implements PriceListFacadeInterface
     /**
      * {@inheritdoc}
      *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
      *
      * @return void
-     * @api
-     *
      */
     public function deletePriceListByName(PriceListTransfer $priceListTransfer): void
     {
@@ -86,12 +72,40 @@ class PriceListFacade extends AbstractFacade implements PriceListFacadeInterface
     /**
      * {@inheritdoc}
      *
-     * @return \Generated\Shared\Transfer\PriceListCollectionTransfer
-     * @api
+     * * @api
      *
+     * @return \Generated\Shared\Transfer\PriceListCollectionTransfer
      */
     public function getPriceListCollection(): PriceListCollectionTransfer
     {
         return $this->getFactory()->createPriceListReader()->findAll();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
+     *
+     * @return \Generated\Shared\Transfer\PriceListTransfer
+     */
+    public function createPriceList(PriceListTransfer $priceListTransfer): PriceListTransfer
+    {
+        return $this->getFactory()->createPriceListWriter()->create($priceListTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
+     *
+     * @return \Generated\Shared\Transfer\PriceListTransfer
+     */
+    public function updatePriceList(PriceListTransfer $priceListTransfer): PriceListTransfer
+    {
+        return $this->getFactory()->createPriceListWriter()->update($priceListTransfer);
     }
 }

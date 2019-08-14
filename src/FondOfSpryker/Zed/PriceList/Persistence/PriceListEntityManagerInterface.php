@@ -9,7 +9,7 @@ interface PriceListEntityManagerInterface
     /**
      * Specification:
      * - Create or update a price list.
-     * - Finds a price list by PriceListTransfer::idPriceList and PriceListTransfer::name.
+     * - Finds a price list by PriceListTransfer::idPriceList.
      * - Persists the entity to DB.
      *
      * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
