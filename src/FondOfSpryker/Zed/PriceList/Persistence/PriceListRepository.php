@@ -17,8 +17,6 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
      * @param int $idPriceList
      *
      * @return \Generated\Shared\Transfer\PriceListTransfer|null
-     *
-     * @throws
      */
     public function getById(int $idPriceList): ?PriceListTransfer
     {
@@ -41,8 +39,6 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
      * @param string $name
      *
      * @return \Generated\Shared\Transfer\PriceListTransfer|null
-     *
-     * @throws
      */
     public function getByName(string $name): ?PriceListTransfer
     {

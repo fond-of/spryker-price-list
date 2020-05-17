@@ -15,8 +15,6 @@ class PriceListEntityManager extends AbstractEntityManager implements PriceListE
      *
      * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
      *
-     * @throws
-     *
      * @return \Generated\Shared\Transfer\PriceListTransfer
      */
     public function persist(PriceListTransfer $priceListTransfer): PriceListTransfer
@@ -43,8 +41,6 @@ class PriceListEntityManager extends AbstractEntityManager implements PriceListE
      *
      * @param int $idProductList
      *
-     * @throws
-     *
      * @return void
      */
     public function deleteById(int $idProductList): void
@@ -59,8 +55,6 @@ class PriceListEntityManager extends AbstractEntityManager implements PriceListE
      * {@inheritdoc}
      *
      * @param string $name
-     *
-     * @throws
      *
      * @return void
      */

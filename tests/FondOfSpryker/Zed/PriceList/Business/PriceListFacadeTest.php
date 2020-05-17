@@ -65,18 +65,37 @@ class PriceListFacadeTest extends Unit
     /**
      * @return void
      */
-    public function testPersistPriceList(): void
+    public function testCreatePriceList(): void
     {
         $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
             ->method('createPriceListWriter')
             ->willReturn($this->priceListWriterMock);
 
         $this->priceListWriterMock->expects($this->atLeastOnce())
-            ->method('persist')
+            ->method('create')
             ->with($this->priceListTransferMock)
             ->willReturn($this->priceListTransferMock);
 
-        $priceListTransfer = $this->priceListFacade->persistPriceList($this->priceListTransferMock);
+        $priceListTransfer = $this->priceListFacade->createPriceList($this->priceListTransferMock);
+
+        $this->assertEquals($this->priceListTransferMock, $priceListTransfer);
+    }
+
+    /**
+     * @return void
+     */
+    public function testUpdatePriceList(): void
+    {
+        $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
+            ->method('createPriceListWriter')
+            ->willReturn($this->priceListWriterMock);
+
+        $this->priceListWriterMock->expects($this->atLeastOnce())
+            ->method('update')
+            ->with($this->priceListTransferMock)
+            ->willReturn($this->priceListTransferMock);
+
+        $priceListTransfer = $this->priceListFacade->updatePriceList($this->priceListTransferMock);
 
         $this->assertEquals($this->priceListTransferMock, $priceListTransfer);
     }
