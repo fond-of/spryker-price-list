@@ -12,7 +12,7 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 class PriceListRepository extends AbstractRepository implements PriceListRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @param int $idPriceList
      *
@@ -28,13 +28,14 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
         if (!$fosPriceList) {
             return null;
         }
+
         return $this->getFactory()
             ->createPropelPriceListMapper()
             ->mapEntityToTransfer($fosPriceList, new PriceListTransfer());
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @param string $name
      *
@@ -50,13 +51,14 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
         if (!$fosPriceList) {
             return null;
         }
+
         return $this->getFactory()
             ->createPropelPriceListMapper()
             ->mapEntityToTransfer($fosPriceList, new PriceListTransfer());
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @return \Generated\Shared\Transfer\PriceListCollectionTransfer
      */

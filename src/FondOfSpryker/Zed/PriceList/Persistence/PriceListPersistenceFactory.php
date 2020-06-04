@@ -10,6 +10,7 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 /**
  * @method \FondOfSpryker\Zed\PriceList\PriceListConfig getConfig()
  * @method \FondOfSpryker\Zed\PriceList\Persistence\PriceListRepositoryInterface getRepository()
+ * @method \FondOfSpryker\Zed\PriceList\Persistence\PriceListEntityManagerInterface getEntityManager()
  */
 class PriceListPersistenceFactory extends AbstractPersistenceFactory
 {
