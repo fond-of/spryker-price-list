@@ -5,6 +5,7 @@ namespace FondOfSpryker\Zed\PriceList\Business;
 use Codeception\Test\Unit;
 use FondOfSpryker\Zed\PriceList\Business\Model\PriceListReaderInterface;
 use FondOfSpryker\Zed\PriceList\Business\Model\PriceListWriterInterface;
+use Generated\Shared\Transfer\PriceListCollectionTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
 
 class PriceListFacadeTest extends Unit
@@ -35,6 +36,11 @@ class PriceListFacadeTest extends Unit
     protected $priceListFacade;
 
     /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListCollectionTransfer
+     */
+    protected $priceListCollectionTransferMock;
+
+    /**
      * @return void
      */
     protected function _before(): void
@@ -57,9 +63,114 @@ class PriceListFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->priceListCollectionTransferMock = $this->getMockBuilder(PriceListCollectionTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->priceListFacade = new PriceListFacade();
 
         $this->priceListFacade->setFactory($this->priceListBusinessFactoryMock);
+    }
+
+    /**
+     * @return void
+     */
+    public function testFindPriceListById(): void
+    {
+        $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
+            ->method('createPriceListReader')
+            ->willReturn($this->priceListReaderMock);
+
+        $this->priceListReaderMock->expects($this->atLeastOnce())
+            ->method('findById')
+            ->with($this->priceListTransferMock)
+            ->willReturn($this->priceListTransferMock);
+
+        $this->assertInstanceOf(
+            PriceListTransfer::class,
+            $this->priceListFacade->findPriceListById(
+                $this->priceListTransferMock
+            )
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testFindPriceListByName(): void
+    {
+        $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
+            ->method('createPriceListReader')
+            ->willReturn($this->priceListReaderMock);
+
+        $this->priceListReaderMock->expects($this->atLeastOnce())
+            ->method('findByName')
+            ->with($this->priceListTransferMock)
+            ->willReturn($this->priceListTransferMock);
+
+        $this->assertInstanceOf(
+            PriceListTransfer::class,
+            $this->priceListFacade->findPriceListByName(
+                $this->priceListTransferMock
+            )
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testDeletePriceListById(): void
+    {
+        $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
+            ->method('createPriceListWriter')
+            ->willReturn($this->priceListWriterMock);
+
+        $this->priceListWriterMock->expects($this->atLeastOnce())
+            ->method('deleteById')
+            ->with($this->priceListTransferMock)
+            ->willReturn($this->priceListTransferMock);
+
+        $this->priceListFacade->deletePriceListById(
+            $this->priceListTransferMock
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testDeletePriceListByName(): void
+    {
+        $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
+            ->method('createPriceListWriter')
+            ->willReturn($this->priceListWriterMock);
+
+        $this->priceListWriterMock->expects($this->atLeastOnce())
+            ->method('deleteByName')
+            ->with($this->priceListTransferMock)
+            ->willReturn($this->priceListTransferMock);
+
+        $this->priceListFacade->deletePriceListByName(
+            $this->priceListTransferMock
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetPriceListCollection(): void
+    {
+        $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
+            ->method('createPriceListReader')
+            ->willReturn($this->priceListReaderMock);
+
+        $this->priceListReaderMock->expects($this->atLeastOnce())
+            ->method('findAll')
+            ->willReturn($this->priceListCollectionTransferMock);
+
+        $this->assertInstanceOf(
+            PriceListCollectionTransfer::class,
+            $this->priceListFacade->getPriceListCollection()
+        );
     }
 
     /**
