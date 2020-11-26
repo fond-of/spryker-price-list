@@ -77,17 +77,17 @@ class PriceListFacadeTest extends Unit
      */
     public function testFindPriceListById(): void
     {
-        $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->priceListBusinessFactoryMock->expects(static::atLeastOnce())
             ->method('createPriceListReader')
             ->willReturn($this->priceListReaderMock);
 
-        $this->priceListReaderMock->expects($this->atLeastOnce())
+        $this->priceListReaderMock->expects(static::atLeastOnce())
             ->method('findById')
             ->with($this->priceListTransferMock)
             ->willReturn($this->priceListTransferMock);
 
-        $this->assertInstanceOf(
-            PriceListTransfer::class,
+        static::assertEquals(
+            $this->priceListTransferMock,
             $this->priceListFacade->findPriceListById(
                 $this->priceListTransferMock
             )
@@ -99,17 +99,17 @@ class PriceListFacadeTest extends Unit
      */
     public function testFindPriceListByName(): void
     {
-        $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->priceListBusinessFactoryMock->expects(static::atLeastOnce())
             ->method('createPriceListReader')
             ->willReturn($this->priceListReaderMock);
 
-        $this->priceListReaderMock->expects($this->atLeastOnce())
+        $this->priceListReaderMock->expects(static::atLeastOnce())
             ->method('findByName')
             ->with($this->priceListTransferMock)
             ->willReturn($this->priceListTransferMock);
 
-        $this->assertInstanceOf(
-            PriceListTransfer::class,
+        static::assertEquals(
+            $this->priceListTransferMock,
             $this->priceListFacade->findPriceListByName(
                 $this->priceListTransferMock
             )
@@ -121,14 +121,13 @@ class PriceListFacadeTest extends Unit
      */
     public function testDeletePriceListById(): void
     {
-        $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->priceListBusinessFactoryMock->expects(static::atLeastOnce())
             ->method('createPriceListWriter')
             ->willReturn($this->priceListWriterMock);
 
-        $this->priceListWriterMock->expects($this->atLeastOnce())
+        $this->priceListWriterMock->expects(static::atLeastOnce())
             ->method('deleteById')
-            ->with($this->priceListTransferMock)
-            ->willReturn($this->priceListTransferMock);
+            ->with($this->priceListTransferMock);
 
         $this->priceListFacade->deletePriceListById(
             $this->priceListTransferMock
@@ -140,14 +139,13 @@ class PriceListFacadeTest extends Unit
      */
     public function testDeletePriceListByName(): void
     {
-        $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->priceListBusinessFactoryMock->expects(static::atLeastOnce())
             ->method('createPriceListWriter')
             ->willReturn($this->priceListWriterMock);
 
-        $this->priceListWriterMock->expects($this->atLeastOnce())
+        $this->priceListWriterMock->expects(static::atLeastOnce())
             ->method('deleteByName')
-            ->with($this->priceListTransferMock)
-            ->willReturn($this->priceListTransferMock);
+            ->with($this->priceListTransferMock);
 
         $this->priceListFacade->deletePriceListByName(
             $this->priceListTransferMock
@@ -159,16 +157,16 @@ class PriceListFacadeTest extends Unit
      */
     public function testGetPriceListCollection(): void
     {
-        $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->priceListBusinessFactoryMock->expects(static::atLeastOnce())
             ->method('createPriceListReader')
             ->willReturn($this->priceListReaderMock);
 
-        $this->priceListReaderMock->expects($this->atLeastOnce())
+        $this->priceListReaderMock->expects(static::atLeastOnce())
             ->method('findAll')
             ->willReturn($this->priceListCollectionTransferMock);
 
-        $this->assertInstanceOf(
-            PriceListCollectionTransfer::class,
+        static::assertEquals(
+            $this->priceListCollectionTransferMock,
             $this->priceListFacade->getPriceListCollection()
         );
     }
@@ -178,18 +176,18 @@ class PriceListFacadeTest extends Unit
      */
     public function testCreatePriceList(): void
     {
-        $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->priceListBusinessFactoryMock->expects(static::atLeastOnce())
             ->method('createPriceListWriter')
             ->willReturn($this->priceListWriterMock);
 
-        $this->priceListWriterMock->expects($this->atLeastOnce())
+        $this->priceListWriterMock->expects(static::atLeastOnce())
             ->method('create')
             ->with($this->priceListTransferMock)
             ->willReturn($this->priceListTransferMock);
 
         $priceListTransfer = $this->priceListFacade->createPriceList($this->priceListTransferMock);
 
-        $this->assertEquals($this->priceListTransferMock, $priceListTransfer);
+        static::assertEquals($this->priceListTransferMock, $priceListTransfer);
     }
 
     /**
@@ -197,17 +195,17 @@ class PriceListFacadeTest extends Unit
      */
     public function testUpdatePriceList(): void
     {
-        $this->priceListBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->priceListBusinessFactoryMock->expects(static::atLeastOnce())
             ->method('createPriceListWriter')
             ->willReturn($this->priceListWriterMock);
 
-        $this->priceListWriterMock->expects($this->atLeastOnce())
+        $this->priceListWriterMock->expects(static::atLeastOnce())
             ->method('update')
             ->with($this->priceListTransferMock)
             ->willReturn($this->priceListTransferMock);
 
         $priceListTransfer = $this->priceListFacade->updatePriceList($this->priceListTransferMock);
 
-        $this->assertEquals($this->priceListTransferMock, $priceListTransfer);
+        static::assertEquals($this->priceListTransferMock, $priceListTransfer);
     }
 }
