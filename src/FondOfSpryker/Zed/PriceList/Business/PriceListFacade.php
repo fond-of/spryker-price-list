@@ -3,6 +3,7 @@
 namespace FondOfSpryker\Zed\PriceList\Business;
 
 use Generated\Shared\Transfer\PriceListCollectionTransfer;
+use Generated\Shared\Transfer\PriceListListTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -107,5 +108,20 @@ class PriceListFacade extends AbstractFacade implements PriceListFacadeInterface
     public function updatePriceList(PriceListTransfer $priceListTransfer): PriceListTransfer
     {
         return $this->getFactory()->createPriceListWriter()->update($priceListTransfer);
+    }
+
+    /**
+     * Specification:
+     * - Finds price lists by criteria from PriceListListTransfer.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PriceListListTransfer $priceListListTransfer
+     *
+     * @return \Generated\Shared\Transfer\PriceListListTransfer
+     */
+    public function findPriceLists(PriceListListTransfer $priceListListTransfer): PriceListListTransfer
+    {
+        return $this->getFactory()->createPriceListReader()->findByPriceListList($priceListListTransfer);
     }
 }

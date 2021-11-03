@@ -4,7 +4,9 @@ namespace FondOfSpryker\Zed\PriceList\Business\Model;
 
 use FondOfSpryker\Zed\PriceList\Persistence\PriceListRepositoryInterface;
 use Generated\Shared\Transfer\PriceListCollectionTransfer;
+use Generated\Shared\Transfer\PriceListListTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
+use Generated\Shared\Transfer\QueryJoinCollectionTransfer;
 
 class PriceListReader implements PriceListReaderInterface
 {
@@ -14,11 +16,20 @@ class PriceListReader implements PriceListReaderInterface
     protected $repository;
 
     /**
-     * @param \FondOfSpryker\Zed\PriceList\Persistence\PriceListRepositoryInterface $repository
+     * @var array<\FondOfOryx\Zed\PriceListExtension\Dependency\Plugin\SearchPriceListQueryExpanderPluginInterface>
      */
-    public function __construct(PriceListRepositoryInterface $repository)
-    {
+    protected $searchPriceListQueryExpanderPlugins;
+
+    /**
+     * @param \FondOfSpryker\Zed\PriceList\Persistence\PriceListRepositoryInterface $repository
+     * @param array<\FondOfOryx\Zed\PriceListExtension\Dependency\Plugin\SearchPriceListQueryExpanderPluginInterface> $searchPriceListQueryExpanderPlugins
+     */
+    public function __construct(
+        PriceListRepositoryInterface $repository,
+        array $searchPriceListQueryExpanderPlugins = []
+    ) {
         $this->repository = $repository;
+        $this->searchPriceListQueryExpanderPlugins = $searchPriceListQueryExpanderPlugins;
     }
 
     /**
@@ -51,5 +62,39 @@ class PriceListReader implements PriceListReaderInterface
     public function findAll(): PriceListCollectionTransfer
     {
         return $this->repository->getAll();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PriceListListTransfer $priceListListTransfer
+     *
+     * @return \Generated\Shared\Transfer\PriceListListTransfer
+     */
+    public function findByPriceListList(PriceListListTransfer $priceListListTransfer): PriceListListTransfer
+    {
+        $priceListListTransfer = $this->executeSearchPriceListQueryExpanderPlugins($priceListListTransfer);
+
+        return $this->repository->findPriceLists($priceListListTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PriceListListTransfer $priceListListTransfer
+     *
+     * @return \Generated\Shared\Transfer\PriceListListTransfer
+     */
+    protected function executeSearchPriceListQueryExpanderPlugins(PriceListListTransfer $priceListListTransfer): PriceListListTransfer
+    {
+        $queryJoinCollectionTransfer = new QueryJoinCollectionTransfer();
+        $filterTransfers = $priceListListTransfer->getFilterFields()->getArrayCopy();
+
+        foreach ($this->searchPriceListQueryExpanderPlugins as $searchPriceListQueryExpanderPlugin) {
+            if ($searchPriceListQueryExpanderPlugin->isApplicable($filterTransfers)) {
+                $queryJoinCollectionTransfer = $searchPriceListQueryExpanderPlugin->expand(
+                    $filterTransfers,
+                    $queryJoinCollectionTransfer
+                );
+            }
+        }
+
+        return $priceListListTransfer->setQueryJoins($queryJoinCollectionTransfer);
     }
 }
