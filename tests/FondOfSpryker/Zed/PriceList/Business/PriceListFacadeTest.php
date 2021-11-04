@@ -6,6 +6,7 @@ use Codeception\Test\Unit;
 use FondOfSpryker\Zed\PriceList\Business\Model\PriceListReaderInterface;
 use FondOfSpryker\Zed\PriceList\Business\Model\PriceListWriterInterface;
 use Generated\Shared\Transfer\PriceListCollectionTransfer;
+use Generated\Shared\Transfer\PriceListListTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
 
 class PriceListFacadeTest extends Unit
@@ -31,14 +32,19 @@ class PriceListFacadeTest extends Unit
     protected $priceListTransferMock;
 
     /**
-     * @var \FondOfSpryker\Zed\PriceList\Business\PriceListFacadeInterface
-     */
-    protected $priceListFacade;
-
-    /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListCollectionTransfer
      */
     protected $priceListCollectionTransferMock;
+
+    /**
+     * @var \Generated\Shared\Transfer\PriceListListTransfer|mixed|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected $priceListListTransferMock;
+
+    /**
+     * @var \FondOfSpryker\Zed\PriceList\Business\PriceListFacadeInterface
+     */
+    protected $priceListFacade;
 
     /**
      * @return void
@@ -64,6 +70,10 @@ class PriceListFacadeTest extends Unit
             ->getMock();
 
         $this->priceListCollectionTransferMock = $this->getMockBuilder(PriceListCollectionTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->priceListListTransferMock = $this->getMockBuilder(PriceListListTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -207,5 +217,24 @@ class PriceListFacadeTest extends Unit
         $priceListTransfer = $this->priceListFacade->updatePriceList($this->priceListTransferMock);
 
         static::assertEquals($this->priceListTransferMock, $priceListTransfer);
+    }
+
+    /**
+     * @return void
+     */
+    public function testFindPriceLists(): void
+    {
+        $this->priceListBusinessFactoryMock->expects(static::atLeastOnce())
+            ->method('createPriceListReader')
+            ->willReturn($this->priceListReaderMock);
+
+        $this->priceListReaderMock->expects(static::atLeastOnce())
+            ->method('findByPriceListList')
+            ->with($this->priceListListTransferMock)
+            ->willReturn($this->priceListListTransferMock);
+
+        $priceListListTransfer = $this->priceListFacade->findPriceLists($this->priceListListTransferMock);
+
+        static::assertEquals($this->priceListListTransferMock, $priceListListTransfer);
     }
 }

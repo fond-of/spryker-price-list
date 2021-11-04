@@ -111,8 +111,7 @@ class PriceListFacade extends AbstractFacade implements PriceListFacadeInterface
     }
 
     /**
-     * Specification:
-     * - Finds price lists by criteria from PriceListListTransfer.
+     * {@inheritDoc}
      *
      * @api
      *
