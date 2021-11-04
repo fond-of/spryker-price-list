@@ -2,7 +2,9 @@
 
 namespace FondOfSpryker\Zed\PriceList\Persistence;
 
+use ArrayObject;
 use Generated\Shared\Transfer\PriceListCollectionTransfer;
+use Generated\Shared\Transfer\PriceListListTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
@@ -30,8 +32,8 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
         }
 
         return $this->getFactory()
-            ->createPropelPriceListMapper()
-            ->mapEntityToTransfer($fosPriceList, new PriceListTransfer());
+            ->createPriceListMapper()
+            ->mapEntityToTransfer($fosPriceList);
     }
 
     /**
@@ -53,8 +55,8 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
         }
 
         return $this->getFactory()
-            ->createPropelPriceListMapper()
-            ->mapEntityToTransfer($fosPriceList, new PriceListTransfer());
+            ->createPriceListMapper()
+            ->mapEntityToTransfer($fosPriceList);
     }
 
     /**
@@ -72,12 +74,43 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
 
         foreach ($fosPriceLists as $fosPriceList) {
             $priceListTransfer = $this->getFactory()
-                ->createPropelPriceListMapper()
-                ->mapEntityToTransfer($fosPriceList, new PriceListTransfer());
+                ->createPriceListMapper()
+                ->mapEntityToTransfer($fosPriceList);
 
             $priceListCollectionTransfer->addPriceList($priceListTransfer);
         }
 
         return $priceListCollectionTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PriceListListTransfer $priceListListTransfer
+     *
+     * @return \Generated\Shared\Transfer\PriceListListTransfer
+     */
+    public function findPriceLists(PriceListListTransfer $priceListListTransfer): PriceListListTransfer
+    {
+        $query = $this->getFactory()
+            ->createPriceListQuery()
+            ->groupByIdPriceList()
+            ->setIgnoreCase(true);
+
+        $query = $this->getFactory()
+            ->createPriceListSearchFilterFieldQueryBuilder()
+            ->addSalesOrderQueryFilters($query, $priceListListTransfer);
+
+        $queryJoinCollectionTransfer = $priceListListTransfer->getQueryJoins();
+
+        if ($queryJoinCollectionTransfer !== null && $queryJoinCollectionTransfer->getQueryJoins()->count() > 0) {
+            $query = $this->getFactory()
+                ->createPriceListQueryJoinQueryBuilder()
+                ->addQueryFilters($query, $queryJoinCollectionTransfer);
+        }
+
+        $priceListTransfers = $this->getFactory()
+            ->createPriceListMapper()
+            ->mapEntityCollectionToTransfers($query->find());
+
+        return $priceListListTransfer->setPriceLists(new ArrayObject($priceListTransfers));
     }
 }

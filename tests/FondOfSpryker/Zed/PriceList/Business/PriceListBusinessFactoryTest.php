@@ -3,17 +3,19 @@
 namespace FondOfSpryker\Zed\PriceList\Business;
 
 use Codeception\Test\Unit;
-use FondOfSpryker\Zed\PriceList\Business\Model\PriceListReaderInterface;
-use FondOfSpryker\Zed\PriceList\Business\Model\PriceListWriterInterface;
+use FondOfSpryker\Zed\PriceList\Business\Model\PriceListReader;
+use FondOfSpryker\Zed\PriceList\Business\Model\PriceListWriter;
 use FondOfSpryker\Zed\PriceList\Persistence\PriceListEntityManager;
 use FondOfSpryker\Zed\PriceList\Persistence\PriceListRepository;
+use FondOfSpryker\Zed\PriceList\PriceListDependencyProvider;
+use Spryker\Zed\Kernel\Container;
 
 class PriceListBusinessFactoryTest extends Unit
 {
     /**
-     * @var \FondOfSpryker\Zed\PriceList\Business\PriceListBusinessFactory
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $priceListBusinessFactory;
+    protected $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\PriceList\Persistence\PriceListRepository
@@ -26,10 +28,19 @@ class PriceListBusinessFactoryTest extends Unit
     protected $priceListEntityManagerMock;
 
     /**
+     * @var \FondOfSpryker\Zed\PriceList\Business\PriceListBusinessFactory
+     */
+    protected $priceListBusinessFactory;
+
+    /**
      * @return void
      */
     protected function _before(): void
     {
+        $this->containerMock = $this->getMockBuilder(Container::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->priceListRepositoryMock = $this->getMockBuilder(PriceListRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -39,6 +50,7 @@ class PriceListBusinessFactoryTest extends Unit
             ->getMock();
 
         $this->priceListBusinessFactory = new PriceListBusinessFactory();
+        $this->priceListBusinessFactory->setContainer($this->containerMock);
         $this->priceListBusinessFactory->setRepository($this->priceListRepositoryMock);
         $this->priceListBusinessFactory->setEntityManager($this->priceListEntityManagerMock);
     }
@@ -48,8 +60,17 @@ class PriceListBusinessFactoryTest extends Unit
      */
     public function testCreatePriceListReader(): void
     {
-        $this->assertInstanceOf(
-            PriceListReaderInterface::class,
+        $this->containerMock->expects(static::atLeastOnce())
+            ->method('has')
+            ->willReturn(true);
+
+        $this->containerMock->expects(static::atLeastOnce())
+            ->method('get')
+            ->with(PriceListDependencyProvider::PLUGINS_SEARCH_PRICE_LIST_QUERY_EXPANDER)
+            ->willReturn([]);
+
+        static::assertInstanceOf(
+            PriceListReader::class,
             $this->priceListBusinessFactory->createPriceListReader()
         );
     }
@@ -59,8 +80,8 @@ class PriceListBusinessFactoryTest extends Unit
      */
     public function testCreatePriceListWriter(): void
     {
-        $this->assertInstanceOf(
-            PriceListWriterInterface::class,
+        static::assertInstanceOf(
+            PriceListWriter::class,
             $this->priceListBusinessFactory->createPriceListWriter()
         );
     }

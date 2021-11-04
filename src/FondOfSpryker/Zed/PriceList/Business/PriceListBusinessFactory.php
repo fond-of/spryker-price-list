@@ -6,6 +6,7 @@ use FondOfSpryker\Zed\PriceList\Business\Model\PriceListReader;
 use FondOfSpryker\Zed\PriceList\Business\Model\PriceListReaderInterface;
 use FondOfSpryker\Zed\PriceList\Business\Model\PriceListWriter;
 use FondOfSpryker\Zed\PriceList\Business\Model\PriceListWriterInterface;
+use FondOfSpryker\Zed\PriceList\PriceListDependencyProvider;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -21,7 +22,8 @@ class PriceListBusinessFactory extends AbstractBusinessFactory
     public function createPriceListReader(): PriceListReaderInterface
     {
         return new PriceListReader(
-            $this->getRepository()
+            $this->getRepository(),
+            $this->getSearchPriceListQueryExpanderPlugins()
         );
     }
 
@@ -33,5 +35,13 @@ class PriceListBusinessFactory extends AbstractBusinessFactory
         return new PriceListWriter(
             $this->getEntityManager()
         );
+    }
+
+    /**
+     * @return array<\FondOfOryx\Zed\PriceListExtension\Dependency\Plugin\SearchPriceListQueryExpanderPluginInterface>
+     */
+    protected function getSearchPriceListQueryExpanderPlugins(): array
+    {
+        return $this->getProvidedDependency(PriceListDependencyProvider::PLUGINS_SEARCH_PRICE_LIST_QUERY_EXPANDER);
     }
 }
