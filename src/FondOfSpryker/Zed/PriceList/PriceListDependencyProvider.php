@@ -45,7 +45,6 @@ class PriceListDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function getSearchPriceListQueryExpanderPlugins(): array
     {
-        return [
-        ];
+        return [];
     }
 }
