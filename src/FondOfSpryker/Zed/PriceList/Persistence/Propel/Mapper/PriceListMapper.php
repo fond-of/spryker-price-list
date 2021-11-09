@@ -11,7 +11,7 @@ class PriceListMapper implements PriceListMapperInterface
     /**
      * @param \Generated\Shared\Transfer\PriceListTransfer $priceListTransfer
      *
-     * @return \Orm\Zed\PriceList\Persistence\Base\FosPriceList
+     * @return \Orm\Zed\PriceList\Persistence\FosPriceList
      */
     public function mapTransferToEntity(PriceListTransfer $priceListTransfer): FosPriceList
     {
@@ -29,7 +29,7 @@ class PriceListMapper implements PriceListMapperInterface
      *
      * @return \Generated\Shared\Transfer\PriceListTransfer
      */
-    public function mapEntityToTransfer(\Orm\Zed\PriceList\Persistence\Base\FosPriceList $entity): PriceListTransfer
+    public function mapEntityToTransfer(FosPriceList $entity): PriceListTransfer
     {
         return (new PriceListTransfer())
             ->fromArray($entity->toArray(), true);
