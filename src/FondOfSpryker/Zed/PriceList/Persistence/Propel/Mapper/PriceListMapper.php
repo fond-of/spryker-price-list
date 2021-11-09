@@ -25,7 +25,7 @@ class PriceListMapper implements PriceListMapperInterface
     }
 
     /**
-     * @param \Orm\Zed\PriceList\Persistence\Base\FosPriceList $entity
+     * @param \Orm\Zed\PriceList\Persistence\FosPriceList $entity
      *
      * @return \Generated\Shared\Transfer\PriceListTransfer
      */
@@ -36,7 +36,7 @@ class PriceListMapper implements PriceListMapperInterface
     }
 
     /**
-     * @param \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\PriceList\Persistence\Base\FosPriceList[] $entityCollection
+     * @param \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\PriceList\Persistence\FosPriceList[] $entityCollection
      *
      * @return \Generated\Shared\Transfer\PriceListTransfer[]
      */
