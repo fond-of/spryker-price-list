@@ -23,9 +23,9 @@ interface PriceListMapperInterface
     public function mapEntityToTransfer(FosPriceList $entity): PriceListTransfer;
 
     /**
-     * @param \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\PriceList\Persistence\FosPriceList[] $entityCollection
+     * @param \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\PriceList\Persistence\FosPriceList> $entityCollection
      *
-     * @return \Generated\Shared\Transfer\PriceListTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceListTransfer>
      */
     public function mapEntityCollectionToTransfers(ObjectCollection $entityCollection): array;
 }

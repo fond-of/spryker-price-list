@@ -90,7 +90,7 @@ class PriceListReader implements PriceListReaderInterface
             if ($searchPriceListQueryExpanderPlugin->isApplicable($filterTransfers)) {
                 $queryJoinCollectionTransfer = $searchPriceListQueryExpanderPlugin->expand(
                     $filterTransfers,
-                    $queryJoinCollectionTransfer
+                    $queryJoinCollectionTransfer,
                 );
             }
         }

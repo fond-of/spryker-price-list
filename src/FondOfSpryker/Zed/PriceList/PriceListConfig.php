@@ -14,7 +14,7 @@ class PriceListConfig extends AbstractBundleConfig
     {
         return $this->get(
             PriceListConstants::FILTER_FIELD_TYPE_MAPPING,
-            PriceListConstants::FILTER_FIELD_TYPE_MAPPING_DEFAULT
+            PriceListConstants::FILTER_FIELD_TYPE_MAPPING_DEFAULT,
         );
     }
 }

@@ -30,7 +30,7 @@ class PriceListStub implements PriceListStubInterface
         /** @var \Generated\Shared\Transfer\PriceListListTransfer $priceListListTransfer */
         $priceListListTransfer = $this->zedRequestClient->call(
             '/price-list/gateway/find-price-lists',
-            $priceListListTransfer
+            $priceListListTransfer,
         );
 
         return $priceListListTransfer;

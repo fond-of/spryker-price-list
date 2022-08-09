@@ -10,6 +10,9 @@ use Spryker\Zed\Kernel\Container;
  */
 class PriceListDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const PLUGINS_SEARCH_PRICE_LIST_QUERY_EXPANDER = 'PLUGINS_SEARCH_PRICE_LIST_QUERY_EXPANDER';
 
     /**

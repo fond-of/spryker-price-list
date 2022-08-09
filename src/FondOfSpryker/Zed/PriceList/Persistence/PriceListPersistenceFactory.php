@@ -48,7 +48,7 @@ class PriceListPersistenceFactory extends AbstractPersistenceFactory
     public function createPriceListSearchFilterFieldQueryBuilder(): PriceListSearchFilterFieldQueryBuilderInterface
     {
         return new PriceListSearchFilterFieldQueryBuilder(
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 }

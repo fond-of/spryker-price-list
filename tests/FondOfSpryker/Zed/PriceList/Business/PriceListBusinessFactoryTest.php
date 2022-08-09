@@ -71,7 +71,7 @@ class PriceListBusinessFactoryTest extends Unit
 
         static::assertInstanceOf(
             PriceListReader::class,
-            $this->priceListBusinessFactory->createPriceListReader()
+            $this->priceListBusinessFactory->createPriceListReader(),
         );
     }
 
@@ -82,7 +82,7 @@ class PriceListBusinessFactoryTest extends Unit
     {
         static::assertInstanceOf(
             PriceListWriter::class,
-            $this->priceListBusinessFactory->createPriceListWriter()
+            $this->priceListBusinessFactory->createPriceListWriter(),
         );
     }
 }

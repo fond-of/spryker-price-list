@@ -82,13 +82,13 @@ class PriceListDependencyProviderTest extends Unit
             ->willReturn($this->zedRequestClientMock);
 
         $container = $this->dependencyProvider->provideServiceLayerDependencies(
-            $this->containerMock
+            $this->containerMock,
         );
 
         static::assertEquals($container, $this->containerMock);
         static::assertInstanceOf(
             PriceListToZedRequestClientInterface::class,
-            $container[PriceListDependencyProvider::CLIENT_ZED_REQUEST]
+            $container[PriceListDependencyProvider::CLIENT_ZED_REQUEST],
         );
     }
 }

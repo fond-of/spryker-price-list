@@ -29,7 +29,7 @@ class PriceListReaderTest extends Unit
     protected $priceListCollectionTransferMock;
 
     /**
-     * @var \Generated\Shared\Transfer\PriceListListTransfer|mixed|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Generated\Shared\Transfer\PriceListListTransfer|\PHPUnit\Framework\MockObject\MockObject|mixed
      */
     protected $priceListListTransferMock;
 
@@ -39,7 +39,7 @@ class PriceListReaderTest extends Unit
     protected $searchPriceListQueryExpanderPluginMocks;
 
     /**
-     * @var \Generated\Shared\Transfer\QueryJoinCollectionTransfer|mixed|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Generated\Shared\Transfer\QueryJoinCollectionTransfer|\PHPUnit\Framework\MockObject\MockObject|mixed
      */
     protected $queryJoinCollectionTransferMock;
 
@@ -81,7 +81,7 @@ class PriceListReaderTest extends Unit
 
         $this->priceListReader = new PriceListReader(
             $this->repositoryMock,
-            $this->searchPriceListQueryExpanderPluginMocks
+            $this->searchPriceListQueryExpanderPluginMocks,
         );
     }
 
@@ -104,8 +104,8 @@ class PriceListReaderTest extends Unit
         static::assertEquals(
             $this->priceListTransferMock,
             $this->priceListReader->findById(
-                $this->priceListTransferMock
-            )
+                $this->priceListTransferMock,
+            ),
         );
     }
 
@@ -128,8 +128,8 @@ class PriceListReaderTest extends Unit
         static::assertEquals(
             $this->priceListTransferMock,
             $this->priceListReader->findByName(
-                $this->priceListTransferMock
-            )
+                $this->priceListTransferMock,
+            ),
         );
     }
 
@@ -144,7 +144,7 @@ class PriceListReaderTest extends Unit
 
         static::assertEquals(
             $this->priceListCollectionTransferMock,
-            $this->priceListReader->findAll()
+            $this->priceListReader->findAll(),
         );
     }
 
@@ -171,8 +171,8 @@ class PriceListReaderTest extends Unit
                 static::callback(
                     static function (QueryJoinCollectionTransfer $queryJoinCollectionTransfer) {
                         return $queryJoinCollectionTransfer->getQueryJoins()->count() === 0;
-                    }
-                )
+                    },
+                ),
             )->willReturn($this->queryJoinCollectionTransferMock);
 
         $this->priceListListTransferMock->expects(static::atLeastOnce())

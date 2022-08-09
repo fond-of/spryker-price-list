@@ -75,7 +75,7 @@ class GatewayControllerTest extends Unit
 
         static::assertEquals(
             $this->priceListListTransferMock,
-            $this->gatewayController->findPriceListsAction($this->priceListListTransferMock)
+            $this->gatewayController->findPriceListsAction($this->priceListListTransferMock),
         );
     }
 }
