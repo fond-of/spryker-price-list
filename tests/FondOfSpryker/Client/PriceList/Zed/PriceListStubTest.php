@@ -50,7 +50,7 @@ class PriceListStubTest extends Unit
             ->method('call')
             ->with(
                 '/price-list/gateway/find-price-lists',
-                $this->priceListListTransferMock
+                $this->priceListListTransferMock,
             )->willReturn($this->priceListListTransferMock);
 
         static::assertEquals(

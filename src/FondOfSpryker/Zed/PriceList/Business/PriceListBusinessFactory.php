@@ -23,7 +23,7 @@ class PriceListBusinessFactory extends AbstractBusinessFactory
     {
         return new PriceListReader(
             $this->getRepository(),
-            $this->getSearchPriceListQueryExpanderPlugins()
+            $this->getSearchPriceListQueryExpanderPlugins(),
         );
     }
 
@@ -33,7 +33,7 @@ class PriceListBusinessFactory extends AbstractBusinessFactory
     public function createPriceListWriter(): PriceListWriterInterface
     {
         return new PriceListWriter(
-            $this->getEntityManager()
+            $this->getEntityManager(),
         );
     }
 

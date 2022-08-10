@@ -66,14 +66,14 @@ class PriceListSearchFilterFieldQueryBuilder implements PriceListSearchFilterFie
             $priceListQuery->add(
                 $this->config->getFilterFieldTypeMapping()[$filterFieldType],
                 $filterFieldTransfer->getValue(),
-                Criteria::EQUAL
+                Criteria::EQUAL,
             );
         }
 
         if ($filterFieldType === static::FILTER_FIELD_TYPE_ORDER_BY) {
             return $this->addOrderByFilter(
                 $priceListQuery,
-                $filterFieldTransfer
+                $filterFieldTransfer,
             );
         }
 

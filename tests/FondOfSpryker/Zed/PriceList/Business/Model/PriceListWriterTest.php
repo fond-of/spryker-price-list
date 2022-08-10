@@ -51,7 +51,7 @@ class PriceListWriterTest extends Unit
         $this->namePriceList = 'name-price-list';
 
         $this->priceListWriter = new PriceListWriter(
-            $this->priceListEntityManagerInterfaceMock
+            $this->priceListEntityManagerInterfaceMock,
         );
     }
 
@@ -68,8 +68,8 @@ class PriceListWriterTest extends Unit
         $this->assertInstanceOf(
             PriceListTransfer::class,
             $this->priceListWriter->persist(
-                $this->priceListTransferMock
-            )
+                $this->priceListTransferMock,
+            ),
         );
     }
 
@@ -87,7 +87,7 @@ class PriceListWriterTest extends Unit
             ->with($this->idPriceList);
 
         $this->priceListWriter->deleteById(
-            $this->priceListTransferMock
+            $this->priceListTransferMock,
         );
     }
 
@@ -105,7 +105,7 @@ class PriceListWriterTest extends Unit
             ->with($this->namePriceList);
 
         $this->priceListWriter->deleteByName(
-            $this->priceListTransferMock
+            $this->priceListTransferMock,
         );
     }
 
@@ -122,8 +122,8 @@ class PriceListWriterTest extends Unit
         $this->assertInstanceOf(
             PriceListTransfer::class,
             $this->priceListWriter->create(
-                $this->priceListTransferMock
-            )
+                $this->priceListTransferMock,
+            ),
         );
     }
 
@@ -140,8 +140,8 @@ class PriceListWriterTest extends Unit
         $this->assertInstanceOf(
             PriceListTransfer::class,
             $this->priceListWriter->update(
-                $this->priceListTransferMock
-            )
+                $this->priceListTransferMock,
+            ),
         );
     }
 }

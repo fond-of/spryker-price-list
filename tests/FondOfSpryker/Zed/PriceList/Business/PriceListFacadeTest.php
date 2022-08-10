@@ -37,7 +37,7 @@ class PriceListFacadeTest extends Unit
     protected $priceListCollectionTransferMock;
 
     /**
-     * @var \Generated\Shared\Transfer\PriceListListTransfer|mixed|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Generated\Shared\Transfer\PriceListListTransfer|\PHPUnit\Framework\MockObject\MockObject|mixed
      */
     protected $priceListListTransferMock;
 
@@ -99,8 +99,8 @@ class PriceListFacadeTest extends Unit
         static::assertEquals(
             $this->priceListTransferMock,
             $this->priceListFacade->findPriceListById(
-                $this->priceListTransferMock
-            )
+                $this->priceListTransferMock,
+            ),
         );
     }
 
@@ -121,8 +121,8 @@ class PriceListFacadeTest extends Unit
         static::assertEquals(
             $this->priceListTransferMock,
             $this->priceListFacade->findPriceListByName(
-                $this->priceListTransferMock
-            )
+                $this->priceListTransferMock,
+            ),
         );
     }
 
@@ -140,7 +140,7 @@ class PriceListFacadeTest extends Unit
             ->with($this->priceListTransferMock);
 
         $this->priceListFacade->deletePriceListById(
-            $this->priceListTransferMock
+            $this->priceListTransferMock,
         );
     }
 
@@ -158,7 +158,7 @@ class PriceListFacadeTest extends Unit
             ->with($this->priceListTransferMock);
 
         $this->priceListFacade->deletePriceListByName(
-            $this->priceListTransferMock
+            $this->priceListTransferMock,
         );
     }
 
@@ -177,7 +177,7 @@ class PriceListFacadeTest extends Unit
 
         static::assertEquals(
             $this->priceListCollectionTransferMock,
-            $this->priceListFacade->getPriceListCollection()
+            $this->priceListFacade->getPriceListCollection(),
         );
     }
 

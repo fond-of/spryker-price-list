@@ -18,7 +18,7 @@ class PriceListMapper implements PriceListMapperInterface
         $fosPriceList = new FosPriceList();
 
         $fosPriceList->fromArray(
-            $priceListTransfer->modifiedToArray(false)
+            $priceListTransfer->modifiedToArray(false),
         );
 
         return $fosPriceList;
@@ -36,9 +36,9 @@ class PriceListMapper implements PriceListMapperInterface
     }
 
     /**
-     * @param \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\PriceList\Persistence\FosPriceList[] $entityCollection
+     * @param \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\PriceList\Persistence\FosPriceList> $entityCollection
      *
-     * @return \Generated\Shared\Transfer\PriceListTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceListTransfer>
      */
     public function mapEntityCollectionToTransfers(ObjectCollection $entityCollection): array
     {

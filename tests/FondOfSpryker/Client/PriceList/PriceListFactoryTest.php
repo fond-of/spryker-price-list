@@ -60,7 +60,7 @@ class PriceListFactoryTest extends Unit
         static::assertInstanceOf(
             PriceListStub::class,
             $this->factory
-                ->createZedPriceListStub()
+                ->createZedPriceListStub(),
         );
     }
 }

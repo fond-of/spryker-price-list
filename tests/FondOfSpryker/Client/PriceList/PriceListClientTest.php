@@ -67,7 +67,7 @@ class PriceListClientTest extends Unit
 
         static::assertEquals(
             $this->priceListListTransferMock,
-            $this->client->findPriceLists($this->priceListListTransferMock)
+            $this->client->findPriceLists($this->priceListListTransferMock),
         );
     }
 }

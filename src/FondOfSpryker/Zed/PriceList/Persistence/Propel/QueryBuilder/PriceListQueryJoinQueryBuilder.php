@@ -33,7 +33,7 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
             $query = $this->processQueryJoin(
                 $query,
                 $queryJoinTransfer,
-                $whereConditionGroups
+                $whereConditionGroups,
             );
         }
 
@@ -63,7 +63,7 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
         if (count($queryJoinTransfer->getWithColumns()) > 0) {
             $query = $this->addWithColumns(
                 $query,
-                $queryJoinTransfer->getWithColumns()
+                $queryJoinTransfer->getWithColumns(),
             );
         }
 
@@ -71,14 +71,14 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
             $query = $this->addWhereConditionGroup(
                 $query,
                 $queryJoinTransfer->getWhereConditions(),
-                $whereConditionGroups
+                $whereConditionGroups,
             );
         }
 
         if ($queryJoinTransfer->getOrderBy() !== null) {
             $query->orderBy(
                 $queryJoinTransfer->getOrderBy(),
-                $queryJoinTransfer->getOrderDirection() ?? Criteria::DESC
+                $queryJoinTransfer->getOrderDirection() ?? Criteria::DESC,
             );
         }
 
@@ -123,7 +123,7 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
             $query->addJoin(
                 $left,
                 $right,
-                $queryJoinTransfer->getJoinType() ?? Criteria::LEFT_JOIN
+                $queryJoinTransfer->getJoinType() ?? Criteria::LEFT_JOIN,
             );
         }
 
@@ -142,13 +142,13 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
     ): FosPriceListQuery {
         $query->join(
             $queryJoinTransfer->getRelation(),
-            $queryJoinTransfer->getJoinType() ?? Criteria::LEFT_JOIN
+            $queryJoinTransfer->getJoinType() ?? Criteria::LEFT_JOIN,
         );
 
         if ($queryJoinTransfer->getCondition()) {
             $query->addJoinCondition(
                 $queryJoinTransfer->getRelation(),
-                $queryJoinTransfer->getCondition()
+                $queryJoinTransfer->getCondition(),
             );
         }
 
@@ -175,7 +175,7 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
             $query->combine(
                 $conditions,
                 Criteria::LOGICAL_OR,
-                $conditionGroupName
+                $conditionGroupName,
             );
 
             $conditionGroups->append($conditionGroupName);
@@ -206,7 +206,7 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
                 $query->combine(
                     [$combineWithCondition, $conditionName],
                     $queryWhereConditionTransfer->getMergeOperator() ?? Criteria::LOGICAL_OR,
-                    $combineWithCondition
+                    $combineWithCondition,
                 );
 
                 continue;
@@ -239,7 +239,7 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
                 $conditionName,
                 new CustomCriterion(new Criteria(), sprintf('%s%s\'%%%s%%\'', $column, $comparison, $value)),
                 null,
-                Criteria::CUSTOM
+                Criteria::CUSTOM,
             );
         }
 
@@ -247,7 +247,7 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
             $conditionName,
             $column,
             $comparison === Criteria::LIKE ? $this->formatFilterValue($value) : $value,
-            $comparison
+            $comparison,
         );
     }
 
