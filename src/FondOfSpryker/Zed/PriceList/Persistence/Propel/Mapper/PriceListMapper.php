@@ -6,6 +6,9 @@ use Generated\Shared\Transfer\PriceListTransfer;
 use Orm\Zed\PriceList\Persistence\FosPriceList;
 use Propel\Runtime\Collection\ObjectCollection;
 
+/**
+ * @codeCoverageIgnore
+ */
 class PriceListMapper implements PriceListMapperInterface
 {
     /**

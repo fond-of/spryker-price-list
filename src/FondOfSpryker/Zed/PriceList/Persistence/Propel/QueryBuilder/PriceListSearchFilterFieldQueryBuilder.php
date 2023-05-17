@@ -8,6 +8,9 @@ use Generated\Shared\Transfer\PriceListListTransfer;
 use Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 
+/**
+ * @codeCoverageIgnore
+ */
 class PriceListSearchFilterFieldQueryBuilder implements PriceListSearchFilterFieldQueryBuilderInterface
 {
     /**

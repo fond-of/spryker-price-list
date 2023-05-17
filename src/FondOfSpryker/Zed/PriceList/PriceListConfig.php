@@ -5,6 +5,9 @@ namespace FondOfSpryker\Zed\PriceList;
 use FondOfSpryker\Shared\PriceList\PriceListConstants;
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 
+/**
+ * @codeCoverageIgnore
+ */
 class PriceListConfig extends AbstractBundleConfig
 {
     /**

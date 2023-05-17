@@ -6,6 +6,8 @@ use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
 /**
+ * @codeCoverageIgnore
+ *
  * @method \FondOfSpryker\Zed\PriceList\PriceListConfig getConfig()
  */
 class PriceListDependencyProvider extends AbstractBundleDependencyProvider
