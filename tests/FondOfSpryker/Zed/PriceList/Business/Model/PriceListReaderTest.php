@@ -93,7 +93,7 @@ class PriceListReaderTest extends Unit
         $idPriceList = 1;
 
         $this->priceListTransferMock->expects($this->atLeastOnce())
-            ->method('getIdPriceList')
+            ->method('getIdPriceListOrFail')
             ->willReturn($idPriceList);
 
         $this->repositoryMock->expects($this->atLeastOnce())
