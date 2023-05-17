@@ -9,6 +9,8 @@ use Generated\Shared\Transfer\PriceListTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
+ * @codeCoverageIgnore
+ *
  * @method \FondOfSpryker\Zed\PriceList\Persistence\PriceListPersistenceFactory getFactory()
  */
 class PriceListRepository extends AbstractRepository implements PriceListRepositoryInterface

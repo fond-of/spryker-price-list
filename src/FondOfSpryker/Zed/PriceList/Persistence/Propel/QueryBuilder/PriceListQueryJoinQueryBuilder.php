@@ -10,6 +10,9 @@ use Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\Criterion\CustomCriterion;
 
+/**
+ * @codeCoverageIgnore
+ */
 class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderInterface
 {
     /**

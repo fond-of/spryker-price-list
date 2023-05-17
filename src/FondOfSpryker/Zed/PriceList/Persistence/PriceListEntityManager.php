@@ -6,6 +6,8 @@ use Generated\Shared\Transfer\PriceListTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
+ * @codeCoverageIgnore
+ *
  * @method \FondOfSpryker\Zed\PriceList\Persistence\PriceListPersistenceFactory getFactory()
  */
 class PriceListEntityManager extends AbstractEntityManager implements PriceListEntityManagerInterface
