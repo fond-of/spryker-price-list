@@ -21,6 +21,11 @@ class PriceListReader implements PriceListReaderInterface
     protected $searchPriceListQueryExpanderPlugins;
 
     /**
+     * @var array<int, \Generated\Shared\Transfer\PriceListTransfer>
+     */
+    protected static $cachePriceListTransfers = [];
+
+    /**
      * @param \FondOfSpryker\Zed\PriceList\Persistence\PriceListRepositoryInterface $repository
      * @param array<\FondOfOryx\Zed\PriceListExtension\Dependency\Plugin\SearchPriceListQueryExpanderPluginInterface> $searchPriceListQueryExpanderPlugins
      */
@@ -39,9 +44,13 @@ class PriceListReader implements PriceListReaderInterface
      */
     public function findById(PriceListTransfer $priceListTransfer): ?PriceListTransfer
     {
-        $priceListTransfer->requireIdPriceList();
+        $idPriceList = $priceListTransfer->getIdPriceListOrFail();
 
-        return $this->repository->getById($priceListTransfer->getIdPriceList());
+        if (!array_key_exists($idPriceList, static::$cachePriceListTransfers)) {
+            static::$cachePriceListTransfers[$idPriceList] = $this->repository->getById($idPriceList);
+        }
+
+        return static::$cachePriceListTransfers[$idPriceList];
     }
 
     /**
